@@ -4,30 +4,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cafe Simulator</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        if (document.querySelector && window.addEventListener) {
+            document.documentElement.classList.add('js');
+        }
+    </script>
 </head>
 <body>
+    <aside id="warning">This game requires Javascript in order to run. Please enable it in your browser settings or switch to a different browser.</aside>
+    
     <header>
         <h1>Cafe Simulator</h1>
         <span>A Zero Daedalus Game</span>
     </header>
 
     <main>
+        <h2>Your goal is the reach $25,000 in the bank before the 52th week</h2>
         <div class="options">
             <select name="bean" id="bean">
                 <option value="gourmet">Gourmet Shit</option>
                 <option value="hipster">Hipster Shit</option>
                 <option value="good">Good Shit</option>
-                <option value="bad">Cheap Shit</option>
+                <option value="cheap" selected>Cheap Shit</option>
                 <option value="actual">Actual Shit</option>
             </select>
             <select name="price" id="price">
-                <option value="well below">Well Below Cost</option>
-                <option value="below">Below Cost</option>
-                <option value="at">At Cost</option>
-                <option value="above">Above Cost</option>
                 <option value="well above">Well Above Cost</option>
+                <option value="above">Above Cost</option>
+                <option value="at">At Cost</option>
+                <option value="below" selected>Below Cost</option>
+                <option value="well below">Well Below Cost</option>
             </select>
-            <button id="next">Next Turn</button>
+            <button id="next" onclick="cafe.next();">Next</button>
         </div>
 
         <div class="infobar">
@@ -41,17 +49,23 @@
                 Revenue: <span id="revenue"></span>
             </p>
             <p>
-                Expenses:<span id="expenses"></span>
+                Expenses: <span id="expenses"></span>
             </p>
             <p>
                 Tips: <span id="tips"></span>
             </p>
             <p>
-                Profit/Loss: <span id="net"></span>
+                Net: <span id="net"></span>
+            </p>
+            <p>
+                <strong>Bank: <span id="bank"></span></strong>
             </p>
         </div>
     </main>
     
     <script src="script.js"></script>
+    <script>
+        cafe.start();
+    </script>
 </body>
 </html>
