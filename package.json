@@ -1,0 +1,30 @@
+{
+  "license": "GPLv2",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-autoprefixer": "^2.2.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jsdoc": "^0.6.3"
+  },
+  "name": "cafe-sim",
+  "description": "HTML5 and Javascript based cafe simulator game",
+  "version": "0.0.0",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DaJoker29/cafe-sim.git"
+  },
+  "author": "Dewitt A. Buckingham, III <captain@zerodaedalus.net> (http://zerodaedalus.com/)",
+  "bugs": {
+    "url": "https://github.com/DaJoker29/cafe-sim/issues"
+  },
+  "homepage": "https://github.com/DaJoker29/cafe-sim"
+}
