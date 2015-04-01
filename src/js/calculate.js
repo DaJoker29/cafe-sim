@@ -1,111 +1,93 @@
 var cafe = (function ( game ) {
+    var COSTS = {
+        'gourmet': 2.55,
+        'hipster': 2.25,
+        'good': 2.00,
+        'cheap': 1.40,
+        'actual': 0.90
+    };
+    var PRICE_MODEL = {
+        'well above': 2.3,
+        'above': 1.8,
+        'at': 1.05,
+        'below': 1,
+        'well below': 0.8
+    };
 
-    game.calculate = function () {
-        var bean = game.bean.get();
-        var price = game.price.get();
-        var customers = parseInt(game.customers.get());
-        var revenue = 0;
-        var expenses = 0;
-        var tips = 0;
-        var net = 0;
-        var delta; // Change in customers
-        var multiplier; // Returning customers
+    var DELTAS = {
+        'gourmet': 9,
+        'hipster': 7,
+        'good': 5,
+        'cheap': 3,
+        'actual': 1
+    };
 
-        switch (bean) {
-            case 'gourmet':
-                delta = 9;
-                break;
-            case 'hipster':
-                delta = 7;
-                break;
-            case 'good':
-                delta = 5;
-                break;
-            case 'cheap':
-                delta = 3;
-                break;
-            case 'actual':
-                delta = 1;
-                break;
-        }
+    var MULTIPLIERS = {
+        'well above': -0.1,
+        'above': -0.02,
+        'at': -0.005,
+        'below': 0.05,
+        'well below': 0.012
+    };
 
-        switch (price) {
-            case 'well above':
-                multiplier = -0.1;
-                break;
-            case 'above':
-                multiplier = -0.02;
-                break;
-            case 'at':
-                multiplier = -0.005;
-                break;
-            case 'below':
-                multiplier = 0.05;
-                break;
-            case 'well below':
-                multiplier = 0.012;
-                break;
-        }
+    var calcWeek = function() {
+        game.week.set( game.week.get() + 1);
+    };
 
-
-        ////////////////////
-        // Increment Week //
-        ////////////////////
-        game.week.increment();
-
-        /////////////////////////
-        // Calculate Customers //
-        /////////////////////////
+    var calcCustomers = function() {
+        var customers = game.customers.get();
+        var delta = DELTAS[game.bean.get()]; // Change in customers
+        var multiplier = MULTIPLIERS[game.price.get()]; // Returning customers
+        
         customers = Math.floor(customers * multiplier) + delta ;
-        game.customers.change(customers);
+        game.customers.set( game.customers.get() + customers);
+    };
 
-        ///////////////////////////////////
-        // Calculate Revenue and Expense //
-        ///////////////////////////////////
-        var priceList = {
-            'gourmet': 2.55,
-            'hipster': 2.25,
-            'good': 2.00,
-            'cheap': 1.40,
-            'actual': 0.90
-        };
+    var calcRevenue = function () {
+        revenue = game.customers.get() * (COSTS[game.bean.get()] * PRICE_MODEL[game.price.get()]);
+        game.revenue.set(revenue);
+    };
 
-        var priceFactors = {
-            'well above': 2.3,
-            'above': 1.8,
-            'at': 1.05,
-            'below': 1,
-            'well below': 0.8
-        };
+    var calcExpenses = function() {
+        var OVERHEAD = 1; // Flat overhead expense
+        var EPC = 0.3; // Expenses per customer
+        var weeklyCost = game.customers.get() * COSTS[game.bean.get()];
+        var totalExpenses = OVERHEAD + (EPC * game.customers.get()) + weeklyCost;
+        game.expenses.set(totalExpenses);
+    };
 
-        expenses = game.customers.get() * priceList[bean];
-        game.expenses.change(expenses);
-
-        revenue = game.customers.get() * (priceList[bean] * priceFactors[price]);
-        game.revenue.change(revenue);
-
-        ////////////////////
-        // Calculate Tips //
-        ////////////////////
+    var calcTips = function() {
+        var tips = 0;
         for( var i = 0; i < game.customers.get(); i++) {
             var percent = Math.random() * 0.3;
-            var ppc = priceList[bean] * priceFactors[price];
+            var ppc = COSTS[game.bean.get()] * PRICE_MODEL[game.price.get()];
             var tip = percent * ppc;
             tips += parseFloat(tip);
         }
 
-        game.tips.change(tips);
+        game.tips.set(tips);
+    };
 
-        ///////////////////
-        // Calculate Net //
-        ///////////////////
-        net = game.revenue.get() + game.tips.get() - game.expenses.get();
-        game.net.change(net);
+    var calcNet = function() {
+        var net = game.revenue.get() + game.tips.get() - game.expenses.get();
+        game.net.set(net);        
+    };
 
-        ////////////////////
-        // Calculate Bank //
-        ////////////////////
-        game.bank.change(net);
+    var calcBank = function() {
+        game.bank.set( game.bank.get() + game.net.get() );
+    };
+
+    game.calculate = function () {
+        //////////////////////
+        // Run Calculations //
+        //////////////////////
+        calcWeek();
+        calcCustomers();
+        calcRevenue();
+        calcExpenses();
+        calcTips();
+        calcNet();
+        calcBank();
     };
 
     return game;
