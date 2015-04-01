@@ -2,7 +2,7 @@ function Option ( name, options ) {
     var context = this;
 
     this.options = options;
-    this.element = document.querySelector('#' + name);
+    this.element = document.querySelector('.' + name);
 
     this.set = function ( string ) {
         if(this.options.indexOf( string ) >= 0 && this.element.value !== string) {

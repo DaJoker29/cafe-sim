@@ -11,7 +11,7 @@
     </script>
 </head>
 <body>
-    <aside id="warning">This game requires Javascript in order to run. Please enable it in your browser settings or switch to a different browser.</aside>
+    <aside class="warning">This game requires Javascript in order to run. Please enable it in your browser settings or switch to a different browser.</aside>
     
     <header>
         <h1>Cafe Simulator</h1>
@@ -21,46 +21,126 @@
     <main>
         <h2>Your goal is the reach $25,000 in the bank before the 52th week</h2>
         <div class="options">
-            <select name="bean" id="bean">
-                <option value="gourmet">Gourmet Shit</option>
-                <option value="hipster">Hipster Shit</option>
-                <option value="good">Good Shit</option>
-                <option value="cheap" selected>Cheap Shit</option>
-                <option value="actual">Actual Shit</option>
-            </select>
-            <select name="price" id="price">
-                <option value="well above">Well Above Cost</option>
-                <option value="above">Above Cost</option>
-                <option value="at">At Cost</option>
-                <option value="below" selected>Below Cost</option>
-                <option value="well below">Well Below Cost</option>
-            </select>
-            <button id="next" onclick="cafe.next();">Next</button>
+            <h2>Options</h2>
+            <div class="beanDiv">
+                <h3>Bean</h3>
+                <ul>
+                    <li>
+                        <label>Quality: </label>
+                        <select name="bean" class="bean">
+                            <option value="gourmet">Gourmet Shit</option>
+                            <option value="hipster">Hipster Shit</option>
+                            <option value="good">Good Shit</option>
+                            <option value="cheap" selected>Cheap Shit</option>
+                            <option value="actual">Actual Shit</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label>Pricing: </label>
+                        <select name="price" class="price">
+                            <option value="well above">Well Above Cost</option>
+                            <option value="above">Above Cost</option>
+                            <option value="at">At Cost</option>
+                            <option value="below" selected>Below Cost</option>
+                            <option value="well below">Well Below Cost</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div class="foodDiv">
+                <h3>Food</h3>
+                <ul>
+                    <li>
+                        <label>Quality: </label>
+                        <select name="food" class="food">
+                            <option value="gourmet">Gourmet Shit</option>
+                            <option value="hipster">Hipster Shit</option>
+                            <option value="good">Good Shit</option>
+                            <option value="cheap" selected>Cheap Shit</option>
+                            <option value="actual">Actual Shit</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label>Pricing: </label>
+                        <select name="price" class="price">
+                            <option value="well above">Well Above Cost</option>
+                            <option value="above">Above Cost</option>
+                            <option value="at">At Cost</option>
+                            <option value="below" selected>Below Cost</option>
+                            <option value="well below">Well Below Cost</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <div class="infobar">
+        <div class="upgrades">
+            <h2>Upgrades</h2>
+            <ul>
+                <li>
+                    <span>Equipment: <span class="equipment">0</span></span>
+                    <a href="">Upgrade</a>
+                </li>
+                <li>
+                    <span>Kitchen: <span class="kitchen">0</span></span>
+                    <a href="">Upgrade</a>
+                </li>
+                <li>
+                    <span>Decor: <span class="decor">0</span></span>
+                    <a href="">Upgrade</a>
+                </li>
+                <li>
+                    <span>Advertising: <span class="advertising">0</span></span>
+                    <a href="">Upgrade</a>
+                </li>
+                <li>
+                    <span>Employees: <span class="employees">0</span></span>
+                    <a href="">Upgrade</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="factors">
+            <h2>Factors</h2>
             <p>
-                Week: <span id="week"></span>
+                Overhead: <span class="overhead">0</span>
             </p>
             <p>
-                Customers: <span id="customers"></span>
+                Growth Rate: <span class="growth">0</span>
             </p>
             <p>
-                Revenue: <span id="revenue"></span>
-            </p>
-            <p>
-                Expenses: <span id="expenses"></span>
-            </p>
-            <p>
-                Tips: <span id="tips"></span>
-            </p>
-            <p>
-                Net: <span id="net"></span>
-            </p>
-            <p>
-                <strong>Bank: <span id="bank"></span></strong>
+                Customer Loyalty: <span class="loyalty">0</span>
             </p>
         </div>
+
+        <div class="summary">
+            <h2>Summary</h2>
+            <p>
+                Week: <span class="week"></span>
+            </p>
+            <p>
+                Customers: <span class="customers"></span>
+            </p>
+            <p>
+                Happiness: <span class="happiness"></span>
+            </p>
+            <p>
+                Revenue: <span class="revenue"></span>
+            </p>
+            <p>
+                Expenses: <span class="expenses"></span>
+            </p>
+            <p>
+                Tips: <span class="tips"></span>
+            </p>
+            <p>
+                Net: <span class="net"></span>
+            </p>
+            <p>
+                <strong>Bank: <span class="bank"></span></strong>
+            </p>
+        </div>
+        <button class="next" onclick="cafe.next();">Next</button>
     </main>
     
     <script src="script.js"></script>

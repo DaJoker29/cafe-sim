@@ -1,6 +1,6 @@
 function Value ( name, initial ) {
     
-    this.element = document.querySelector('#' + name);
+    this.element = document.querySelector('.' + name);
     this.current = initial || 0;
 
     this.set = function ( number ) {
