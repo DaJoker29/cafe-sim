@@ -1,38 +1,42 @@
 var cafe = (function ( game ) {
+    game.refresh = function() {
+        for (var value in game) {
+            if( game.hasOwnProperty(value) && game[value].show) {
+                game[value].show();
+            }
+        }
+    };
 
-    var defaults = {
-        'bean': 'cheap',
-        'price': 'below'
+    game.listen = function() {
+        for (var option in game) {
+            if (game.hasOwnProperty(option) && game[option].listen) {
+                game[option].listen();
+            }
+        }
+    };
+
+    game.unlisten = function() {
+        for (var option in game) {
+            if (game.hasOwnProperty(option) && game[option].unlisten) {
+                game[option].unlisten();
+            }
+        }
     };
 
     game.start = function() {
-        game.bean.set(defaults.bean);
-        game.bean.listen();
-        game.price.set(defaults.price);
-        game.price.listen();
-        game.week.show();
-        game.customers.show();
-        game.revenue.show();
-        game.expenses.show();
-        game.tips.show();
-        game.net.show();
-        game.bank.show();
+        game.listen();
+        game.refresh();
     };
 
     game.end = function() {
         console.log('Game over');
+        game.unlisten();
     };
 
     game.next = function() {
         if( game.week.get() <= 51 ) {
             game.calculate();
-            game.week.show();
-            game.customers.show();
-            game.revenue.show();
-            game.expenses.show();
-            game.tips.show();
-            game.net.show();
-            game.bank.show();  
+            game.refresh(); 
         } else {
             game.end();
         }
